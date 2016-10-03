@@ -1,0 +1,25 @@
+<html>
+<head>
+<title>Sign in page</title>
+<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<h1>Sign up here:</h1>
+</head>
+<body>
+<div ng-app = "myApp" ng-controller = "meController">
+FirstName: <input type = "text" ng-model = "me.firstname"><br>
+LastName: <input type = "text" ng-model = "me.lastnamr"><br>
+Email: <input type = "email" ng-model = "me.email"><br>
+Birthday: <input type = "date" ng-model = "me.birthday"><br>
+<button ng-click = "submit()"> Sign up</button>
+<p>Already has account?<button ng-click = "login()">Log in</button></p>
+</div>
+<script>
+var myApp = angular.module('myApp', []);
+myApp.controller('meController', function($scope){
+$scope.me = {
+
+}
+})
+</script>
+</body>
+</html>

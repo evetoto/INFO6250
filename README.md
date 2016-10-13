@@ -1,7 +1,7 @@
 # INFO6250
 For assignment review
 
-hw5 + controller.js are for Assignment5. But I have problem about connection. Both Set and get can not working. It always shows that: 
+hw5 + controller.js are for Assignment5. But I have problem about connection. Both Set and get can not working. So I did not upload them to vm. It always shows that: 
 "Uncaught Predis\Connection\ConnectionException: php_network_getaddresses: getaddrinfo failed: Name or service not known [tcp://redis-master:6379] in /usr/share/php/Predis/Connection/AbstractConnection.php:155" 
 I still work on that.
 

@@ -9,9 +9,6 @@ redisApp.controller('myctrl', function ($scope, $http, $cookieStore) {
                  location.href = "http://104.40.49.149/";
               }
            }
-           else{
-              location.href = "login.html";
-           }
 
 
         $scope.signup = function(){
@@ -53,5 +50,9 @@ redisApp.controller('myctrl', function ($scope, $http, $cookieStore) {
                console.log("Please sign up");
            });
        }
+       $scope.new = function(){
+           location.href = "signup.html";
+       }
+
 
 });

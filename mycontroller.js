@@ -2,7 +2,11 @@ var redisApp = angular.module("myApp",['ngCookies']);
 
 redisApp.controller('myctrl', function ($scope, $http, $cookieStore) {
 
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> 0fff021cf0d723a7cbb70d61a1c758cce55c8380
            var cookieUsername = $cookieStore.get("username");
            var cookiePassword = $cookieStore.get("password");
            if(cookieUsername != undefined && cookiePassword != undefined){
@@ -20,14 +24,21 @@ redisApp.controller('myctrl', function ($scope, $http, $cookieStore) {
            });
 
 
+<<<<<<< HEAD
            location.href = "login.html"; 
         }
         
 
+=======
+           location.href = "login.html";
+        }
+
+
+>>>>>>> 0fff021cf0d723a7cbb70d61a1c758cce55c8380
        $scope.goback = function(){
            location.href = "mainpage.html";
         }
-
+       
        $scope.login = function(){
            $http.get("map.php?cmd=get&key=username")
            .success(function(data) {
@@ -50,11 +61,16 @@ redisApp.controller('myctrl', function ($scope, $http, $cookieStore) {
                    $scope.user.username = "";
                }
 
+<<<<<<< HEAD
           }) 
+=======
+          })
+>>>>>>> 0fff021cf0d723a7cbb70d61a1c758cce55c8380
           .error(function(){
                console.log("Please sign up");
           });
        }
+<<<<<<< HEAD
 
        $scope.newuser= function(){
            location.href = "signup.html";
@@ -64,3 +80,11 @@ redisApp.controller('myctrl', function ($scope, $http, $cookieStore) {
 
 
 
+=======
+
+       $scope.newuser= function(){
+           location.href = "signup.html";
+       }
+
+});
+>>>>>>> 0fff021cf0d723a7cbb70d61a1c758cce55c8380

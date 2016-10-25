@@ -1,25 +1,52 @@
 <html>
-<head>
-<title>Sign in page</title>
-<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-<h1>Sign up here:</h1>
-</head>
-<body>
-<div ng-app = "myApp" ng-controller = "meController">
-FirstName: <input type = "text" ng-model = "me.firstname"><br>
-LastName: <input type = "text" ng-model = "me.lastnamr"><br>
-Email: <input type = "email" ng-model = "me.email"><br>
-Birthday: <input type = "date" ng-model = "me.birthday"><br>
-<button ng-click = "submit()"> Sign up</button>
-<p>Already has account?<button ng-click = "login()">Log in</button></p>
-</div>
-<script>
-var myApp = angular.module('myApp', []);
-myApp.controller('meController', function($scope){
-$scope.me = {
-
-}
-})
-</script>
-</body>
+   <head>
+       <title>Sign up page</title>
+      <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+      <h1> Sign up here!</h1>
+   <head>
+   <body>
+      <h2>Start here:</h2>
+      <div ng-app = "myApp" ng-controller="meController">
+        FirstName: <input type = "text" ng-model = "firstname"><br><br>
+        LastName: <input type = "text" ng-model = "lastname"><br><br>
+        Sex: <input type = "radio" ng-model = "sex" value = "Female"> Female
+                <input type = "radio" ng-model = "sex" value ="Male">Male<br><br>
+        Street: <input type = "text" ng-model = "street"><br><br>
+        City: <input type = "text" ng-model = "city"><br><br>
+        State: <select name = "state" ng-model = "state">
+               <option value = "Alaska">Alaska</option>
+               <option value = "Arizona">Arizona</option>
+               <option value = "California">California</option>
+               <option value = "Florida">Florida</option>
+               <option value = "Indiana">Indiana</option>
+               <option value = "Michigan">Michigan</option>
+               <option value = "Nevada">Nevada</option>
+               <option value = "New York">New York</option> 
+               </select>
+        <br><br>
+        Zipcode: <input type = "number" ng-model = "zipcode"><br><br>
+        E-mail: <input type = "email" ng-model = "email"><br><br>
+        BirthDate: <input type = "date" ng-model = "birthday"><br><br>
+        <button ng-click="submit()">Submit</button>
+        <p>{{ res|json }}</p> 
+    </div>  
+    <script>
+      angular.module('myApp', []).controller('meController', function($scope){
+         $scope.submit = function(){
+         var data = {
+            Firstname: $scope.firstname,
+            Lastname: $scope.lastname,
+            Sex: $scope.sex,
+            Street: $scope.street,
+            City: $scope.city,
+            State: $scope.state,
+            Zipcode: $scope.zipcode,
+            Email: $scope.email,
+            DOB: $scope.birthday
+         };
+         $scope.res = data;
+         }
+      });
+    </script>
+  </body>
 </html>

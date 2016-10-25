@@ -1,0 +1,15 @@
+<html ng-app="myApp" ng-controller="myctrl">
+<head>
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.1/angular-cookies.min.js"></script>
+<script src = "mycontroller.js"></script>
+<h1>Log In page</h1>
+</head>
+<body>
+Username(Email): <input type = "email" ng-model = "user.username" class="form-control"><br><br>
+Password: <input type = "password" ng-model = "user.password" class="form-control"><br><br>
+<button ng-click="login()" class="btn btn-primary">Submit</button>
+<button ng-click="newuser()" class="btn btn-primary">New User</button>
+</body>
+</html>

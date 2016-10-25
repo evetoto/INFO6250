@@ -21,7 +21,10 @@ redisApp.controller('myctrl', function ($scope, $http, $cookieStore) {
 
            location.href = "login.html";
         }
-
+        
+        $scope.goback = function(){
+           location.href = "mainpage.html";
+       }
    
    
         $scope.login = function(){
@@ -50,7 +53,7 @@ redisApp.controller('myctrl', function ($scope, $http, $cookieStore) {
                console.log("Please sign up");
            });
        }
-       $scope.new = function(){
+       $scope.newuser = function(){
            location.href = "signup.html";
        }
 

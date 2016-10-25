@@ -1,7 +1,7 @@
 var redisApp = angular.module("myApp",['ngCookies']);
 
-
 redisApp.controller('myctrl', function ($scope, $http, $cookieStore) {
+
 
            var cookieUsername = $cookieStore.get("username");
            var cookiePassword = $cookieStore.get("password");
@@ -19,13 +19,15 @@ redisApp.controller('myctrl', function ($scope, $http, $cookieStore) {
                });
            });
 
+
            location.href = "login.html";
         }
 
-        $scope.goback = function(){
+
+       $scope.goback = function(){
            location.href = "mainpage.html";
         }
-
+       
        $scope.login = function(){
            $http.get("map.php?cmd=get&key=username")
            .success(function(data) {
@@ -47,13 +49,15 @@ redisApp.controller('myctrl', function ($scope, $http, $cookieStore) {
                    alert("Your username is incorrect!")
                    $scope.user.username = "";
                }
-           })
-           .error(function(){
+
+          })
+          .error(function(){
                console.log("Please sign up");
-           });
+          });
        }
+
        $scope.newuser= function(){
            location.href = "signup.html";
-       } 
+       }
 
 });

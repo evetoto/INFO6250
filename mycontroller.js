@@ -53,7 +53,7 @@ redisApp.controller('myctrl', function ($scope, $http, $cookieStore) {
                console.log("Please sign up");
            });
        }
-       $scope.new = function(){
+       $scope.newuser = function(){
            location.href = "signup.html";
        }
 

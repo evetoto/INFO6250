@@ -1,7 +1,57 @@
 var redisApp = angular.module("myApp",['ngCookies']);
 
-redisApp.controller('myctrl', function ($scope, $http, $cookieStore) {
+redisApp.controller('myctrl', function ($scope, $filter, $http, $cookieStore) {
 
+     $scope.visitor = function(){
+           var minkey = $filter('date')(new Date(),'yyyy-MM-dd HH:mm');
+           $http.get("app.php?cmd=incr&key="+minkey)
+                .success(function(){
+                      $http.get("app.php?cmd=get&key="+minkey)
+                           .success(function (data) {
+                                console.log(minkey+" current minute visitors : "+data.data);
+                                $scope.timesPerMin=data.data;
+                            });
+                });
+
+            var hourkey = $filter('date')(new Date(),'yyyy-MM-dd HH');
+            $http.get("app.php?cmd=incr&key="+hourkey)
+                .success(function(){
+                      $http.get("app.php?cmd=get&key="+ hourkey)
+                           .success(function (data) {
+                                console.log(hourkey+" current hour visitors : "+data.data);
+                                $scope.timesPerHour=data.data;
+                            });
+                });
+
+
+             var daykey = $filter('date')(new Date(),'yyyy-MM-dd');
+             $http.get("app.php?cmd=incr&key="+daykey)
+                .success(function(){
+                      $http.get("app.php?cmd=get&key="+daykey)
+                           .success(function (data) {
+                                console.log(daykey+" today visitors : "+data.data);
+                                $scope.timesPerDay=data.data;
+                            });
+                });
+
+       }
+
+           
+           
+        $scope.get = function(){
+           $http.get("app.php?cmd=get&key="+ $scope.time)
+           .success(function(data){
+                if((data.data) != ""){
+                   // console.log("visitor "+ data.data);
+                    $scope.result = data.data + "  visitors";
+                }else{
+                   // console.log("no visitor");
+                    $scope.result = "No visitor at this time.";
+                }
+           });
+
+        }           
+           
            var cookieUsername = $cookieStore.get("username");
            var cookiePassword = $cookieStore.get("password");
            if(cookieUsername != undefined && cookiePassword != undefined){

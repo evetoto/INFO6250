@@ -4,14 +4,14 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.1/angular-cookies.min.js"></script>
 <script src = "mycontroller.js"></script>
-<h1>App main page</h1>
+<h1>Visitor Data Page</h1>
 </head>
-<body data-ng-init="visitor()">
-<button ng-click="checkcookies()" class="btn btn-primary">Log In</button></a>
-<a href="signup.html"><button class="btn btn-primary">Sign Up</button></a>
-<br><br><br>
-<a href="counter.html"><button class="btn btn-info">Visitor info</button></a>
-<br><br><br><br>
-<p>{{timesPerYear}}visitors! </p>
+<body>
+History Visitor Total:<input type = "date" ng-model = "time"><br>
+<br><br>
+<p>{{result}}</p>
+<br><br>
+<button ng-click="get()" class="btn btn-primary">GET</button>
+<a href="mainpage.html"><button class="btn btn-primary">Go Back</button></a>
 </body>
 </html>

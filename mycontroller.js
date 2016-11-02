@@ -2,7 +2,7 @@ var redisApp = angular.module("myApp",['ngCookies']);
 
 redisApp.controller('myctrl', function ($scope, $filter, $http, $cookieStore) {
 
-     $scope.visitor = function(){
+       $scope.visitor = function(){
            var minkey = $filter('date')(new Date(),'yyyy-MM-dd HH:mm');
            $http.get("app.php?cmd=incr&key="+minkey)
                 .success(function(){
@@ -12,7 +12,6 @@ redisApp.controller('myctrl', function ($scope, $filter, $http, $cookieStore) {
                                 $scope.timesPerMin=data.data;
                             });
                 });
-
             var hourkey = $filter('date')(new Date(),'yyyy-MM-dd HH');
             $http.get("app.php?cmd=incr&key="+hourkey)
                 .success(function(){
@@ -34,10 +33,29 @@ redisApp.controller('myctrl', function ($scope, $filter, $http, $cookieStore) {
                             });
                 });
 
+             var monkey = $filter('date')(new Date(),'yyyy-MM');
+             $http.get("app.php?cmd=incr&key="+monkey)
+                .success(function(){
+                      $http.get("app.php?cmd=get&key="+monkey)
+                           .success(function (data) {
+                                console.log(monkey+"  visitors : "+data.data);
+                                $scope.timesPerMon=data.data;
+                            });
+                });
+
+             var yearkey = $filter('date')(new Date(),'yyyy');
+             $http.get("app.php?cmd=incr&key="+yearkey)
+                .success(function(){
+                      $http.get("app.php?cmd=get&key="+yearkey)
+                           .success(function (data) {
+                                console.log(yearkey+" visitors : "+data.data);
+                                $scope.timesPerYear=data.data;
+                            });
+                });
+    
+         
        }
 
-           
-           
         $scope.get = function(){
            $http.get("app.php?cmd=get&key="+ $scope.time)
            .success(function(data){
@@ -50,69 +68,59 @@ redisApp.controller('myctrl', function ($scope, $filter, $http, $cookieStore) {
                 }
            });
 
-        }           
-           
-           var cookieUsername = $cookieStore.get("username");
-           var cookiePassword = $cookieStore.get("password");
-           if(cookieUsername != undefined && cookiePassword != undefined){
-              if(confirm("Welcome back " + cookieUsername ) == true) {
-                 location.href = "http://www.info6250.com";
-              }
-           }
-
-        $scope.signup = function(){
-           angular.forEach($scope.info, function(value, key){
-               $http.get("map.php?cmd=set&key=" + key+ "&value="+ value)
-               .success(function(){
-                  $scope.redisResponse = "Updated";
-               });
-           });
-
-
-
-           location.href = "login.html";
         }
 
-
-       $scope.goback = function(){
-           location.href = "mainpage.html";
-        }
+        $scope.checkcookies = function(){
        
-       $scope.login = function(){
-           $http.get("map.php?cmd=get&key=username")
-           .success(function(data) {
-               if(data.data == $scope.user.username){
-                   $http.get("map.php?cmd=get&key=password")
-                   .success(function(data2) {
-                        if(data2.data == $scope.user.password){
-                             $cookieStore.put("username", $scope.user.username);
-                             $cookieStore.put("password", $scope.user.password);
-                             location.href = "http://www.info6250.com";
-                        }
-                        else{
-                             alert("Your password is incorrect!");
-                             $scope.user.password = "";
-                        }
-                   })
-               }
-               else{
-                   alert("Your username is incorrect!")
-                   $scope.user.username = "";
-               }
-
-
-          })
-
-          .error(function(){
-               console.log("Please sign up");
-          });
+           var Email = $cookieStore.get("email");
+           var Password = $cookieStore.get("password");
+           if(Email!=undefined && Password!=undefined){
+                if(confirm("Welcome back! " + Email)==true){
+                    location.href = "http://www.info6250.com/";
+                }else{
+                    location.href = "signup.html";
+                }
+           }else{
+                location.href = "login.html";
+           }
        }
 
+        
 
-       $scope.newuser= function(){
-           location.href = "signup.html";
-       } 
+       $scope.signup = function(){
+           $http.get("app.php?cmd=set&key="+$scope.info.email+"&value="+$scope.info.password)
+           .success(function () {
+                $scope.redisResponse = "Updated";
+                location.href = "login.html";
+           });
+       }     
+
+
+       
+       $scope.login = function(){
+            $http.get("app.php?cmd=get&key="+$scope.user.email)
+            .success(function (data) {
+                if(data.data == ""){
+                    console.log(data);
+                    alert("New user? Please sign up first.");
+                    $scope.user.email="";
+                }else{
+                    if(data.data==$scope.user.password){
+                         $cookieStore.put("email", $scope.user.email);
+                         $cookieStore.put("password", $scope.user.password);
+                         location.href = "http://www.info6250.com";
+                    }else{
+                         alert("Your password is incorrect!");
+                         $scope.user.password = "";
+                    } 
+                }               
+            })
+            .error(function () {
+                console.log("error");
+                
+            });
+    
+       }
 
 });
-
 

@@ -56,7 +56,7 @@ redisApp.controller('myctrl', function ($scope, $filter, $http, $cookieStore) {
            var cookiePassword = $cookieStore.get("password");
            if(cookieUsername != undefined && cookiePassword != undefined){
               if(confirm("Welcome back " + cookieUsername ) == true) {
-                 location.href = "http://104.40.49.149/";
+                 location.href = "http://www.info6250.com";
               }
            }
 
@@ -87,7 +87,7 @@ redisApp.controller('myctrl', function ($scope, $filter, $http, $cookieStore) {
                         if(data2.data == $scope.user.password){
                              $cookieStore.put("username", $scope.user.username);
                              $cookieStore.put("password", $scope.user.password);
-                             location.href = "http://104.40.49.149/";
+                             location.href = "http://www.info6250.com";
                         }
                         else{
                              alert("Your password is incorrect!");
